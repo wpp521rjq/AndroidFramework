@@ -11,9 +11,14 @@ public class RequestClient {
 
 
     private static  RequestClient mRequestClient=null;
+    //进行锁定双重检查
     public  static  RequestClient getInstance(){
         if(mRequestClient==null){
-            mRequestClient=new RequestClient();
+            synchronized (RequestClient.class){
+                if(mRequestClient==null){
+                    mRequestClient=new RequestClient();
+                }
+            }
         }
         return mRequestClient;
     }

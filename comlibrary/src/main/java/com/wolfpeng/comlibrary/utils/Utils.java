@@ -2,7 +2,7 @@ package com.wolfpeng.comlibrary.utils;
 
 import android.content.Context;
 
-import com.gzhbeidou.baselibrary.base.RxApplication;
+import com.wolfpeng.comlibrary.base.ComLibraryApplication;
 
 /**
  * author：WolfWang
@@ -21,6 +21,6 @@ public class Utils {
      * @return ApplicationContext
      */
     public static Context getContext() {
-        return RxApplication.getmApplication().getApplicationContext();
+        return ComLibraryApplication.getApplication().getApplicationContext();
     }
 }
