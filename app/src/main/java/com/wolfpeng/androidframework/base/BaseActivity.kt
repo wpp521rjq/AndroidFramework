@@ -22,4 +22,10 @@ class BaseActivity:AppCompatActivity(){
     }
 
 
+
+
+
+
+
+
 }

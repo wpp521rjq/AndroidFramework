@@ -3,6 +3,9 @@ package com.wolfpeng.androidframework
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
+/**
+ * main activity 主activity 的
+ */
 class MainActivity : AppCompatActivity() {
 
 
