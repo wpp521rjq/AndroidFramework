@@ -22,10 +22,9 @@ public class ComLibraryApplication {
         setApplication(application);
     }
 
-    private static void setApplication(Application application){
-        ComLibraryApplication.application=application;
+    private static void setApplication(Application application) {
+        ComLibraryApplication.application = application;
     }
-
 
 
 }

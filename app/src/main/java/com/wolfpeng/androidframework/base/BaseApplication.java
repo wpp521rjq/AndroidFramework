@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
+import com.wolfpeng.androidframework.AppManager;
 import com.wolfpeng.comlibrary.base.ComLibraryApplication;
 
 /**
@@ -54,10 +55,12 @@ public class BaseApplication extends Application {
     }
 
 
-
-
-
-
-
-
+    /**
+     * 程序结束
+     */
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        AppManager.getAppManager().AppExit(this);
+    }
 }
