@@ -1,10 +1,12 @@
 package com.wolfpeng.androidframework.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.wolfpeng.androidframework.R;
-import com.wolfpeng.androidframework.base.mvp.BaseActivity;
+import com.wolfpeng.androidframework.base.BaseActivity;
+import com.wolfpeng.androidframework.base.BaseToolBarActivity;
 
 /**
  * author：WolfWang
@@ -13,14 +15,7 @@ import com.wolfpeng.androidframework.base.mvp.BaseActivity;
  * description：
  */
 
-public class MainActivity extends BaseActivity {
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
+public class MainActivity extends BaseToolBarActivity {
 
     @Override
     public int getLayoutId() {
@@ -32,5 +27,27 @@ public class MainActivity extends BaseActivity {
     public void onCreateAfter(Bundle savedInstanceState) {
 //        showWaitDialogWithProgress(null,false,50);
 //        showWaitDialog(null,false);
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+
+    @NonNull
+    @Override
+    protected String getTitleString() {
+        return "来啊   啊 啊";
+    }
+
+    @Override
+    protected boolean hasBackButton() {
+        return true;
+    }
+
+    @Override
+    protected void hideOrShowToolbar() {
+        super.hideOrShowToolbar();
     }
 }

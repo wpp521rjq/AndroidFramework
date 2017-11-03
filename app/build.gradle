@@ -34,10 +34,9 @@ dependencies {
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation project(':comlibrary')
-//    implementation 'com.kaopiz:kprogresshud:1.1.0'
-
+    //    implementation 'com.kaopiz:kprogresshud:1.1.0'
     //Field and method binding for Android views which uses annotation processing to generate boilerplate code for you.
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
+    implementation 'com.android.support:design:26.1.0'
 }

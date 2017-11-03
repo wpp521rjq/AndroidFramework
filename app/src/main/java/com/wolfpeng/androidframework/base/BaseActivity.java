@@ -1,4 +1,4 @@
-package com.wolfpeng.androidframework.base.mvp;
+package com.wolfpeng.androidframework.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.wolfpeng.androidframework.AppManager;
-import com.wolfpeng.androidframework.base.IWaitDialog;
+import com.wolfpeng.androidframework.base.mvp.IBaseView;
 
 import butterknife.ButterKnife;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * description：
  */
 
-public class BaseActivity extends AppCompatActivity implements IBaseView,IWaitDialog {
+public abstract class BaseActivity extends AppCompatActivity implements IBaseView,IWaitDialog {
 
 
 
@@ -36,9 +36,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseView,IWaitDi
             //没有提供ViewId
             throw new IllegalStateException(this.getClass().getSimpleName() + "没有提供正确的LayoutId");
         }
+        init();
+        onCreateAfter(savedInstanceState);
+    }
+
+    protected void init() {
         //将activity 放入栈中
         AppManager.getAppManager().addActivity(this);
-        onCreateAfter(savedInstanceState);
     }
 
     @Override
@@ -51,18 +55,24 @@ public class BaseActivity extends AppCompatActivity implements IBaseView,IWaitDi
 
     }
 
+
+    private boolean isFirstFocused = true;
     @Override
-    public void initData() {
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (isFirstFocused && hasFocus) {
+            isFirstFocused = false;
+            initData();//此时界面渲染完毕,可以用来初始化数据等
+        }
 
     }
+
     @Override
     protected void onDestroy() {
         //移除任务栈
         AppManager.getAppManager().removeActivity(this);
         super.onDestroy();
     }
-
-
 
     @Override
     public KProgressHUD showWaitDialog(String text, boolean backable) {
