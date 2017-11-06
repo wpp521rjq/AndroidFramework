@@ -39,43 +39,34 @@ public abstract class BaseToolBarActivity extends BaseActivity {
     @Override
     protected void init() {
         super.init();
-
         if (mToolbar == null) // 如果布局文件没有找到toolbar,则不设置actionbar
         {
             throw new IllegalStateException(this.getClass().getSimpleName() + ":要使用BaseToolbarActivity，必须在布局里面增加id为‘id_toolbar’的Toolbar");
         }
-
         initToobarBar(mToolbar);
         initAppBarLayout(mAppBar);
-
     }
-
-
 
     public Toolbar getToolbar() {
         return mToolbar;
     }
-
-
     public AppBarLayout getAppBar() {
         return mAppBar;
     }
 
 
     private void initToobarBar(Toolbar toolbar) {
-
+        setSupportActionBar(toolbar);
         if (!CheckUtils.isEmpty(getSubtitleString())) {
             toolbar.setSubtitle(getSubtitleString());
         }
         if (getTitleString() != null) {
             toolbar.setTitle(getTitleString());
         }
-
-        setSupportActionBar(toolbar);
         if (hasBackButton()) {//如果需要返回按钮
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-
+            actionBar.setTitle("gjhkml");
         }
 
 

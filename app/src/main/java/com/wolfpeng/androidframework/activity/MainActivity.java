@@ -2,10 +2,8 @@ package com.wolfpeng.androidframework.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.wolfpeng.androidframework.R;
-import com.wolfpeng.androidframework.base.BaseActivity;
 import com.wolfpeng.androidframework.base.BaseToolBarActivity;
 
 /**
@@ -37,17 +35,19 @@ public class MainActivity extends BaseToolBarActivity {
 
     @NonNull
     @Override
-    protected String getTitleString() {
-        return "来啊   啊 啊";
+    protected String getSubtitleString() {
+        return "我是副标题";
     }
+
+    @NonNull
+    @Override
+    protected String getTitleString() {
+        return "来啊 啊 啊";
+    }
+
 
     @Override
     protected boolean hasBackButton() {
-        return true;
-    }
-
-    @Override
-    protected void hideOrShowToolbar() {
-        super.hideOrShowToolbar();
+        return false;
     }
 }

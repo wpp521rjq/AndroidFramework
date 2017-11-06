@@ -42,12 +42,6 @@ public class SplashScreenActivity extends BaseToolBarActivity {
         return R.layout.activity_splash_screen;
     }
 
-
-    @Override
-    protected void hideOrShowToolbar() {
-        super.hideOrShowToolbar();
-    }
-
     private void delayedToMain(int delayMillis) {
         mdelayedToMain.postDelayed(mDelayedToMainRunnable, delayMillis);
     }

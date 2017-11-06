@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.wolfpeng.androidframework.AppManager;
+import com.wolfpeng.androidframework.R;
 import com.wolfpeng.androidframework.base.mvp.IBaseView;
+import com.wolfpeng.comlibrary.utils.StatusBarUtils;
 
 import butterknife.ButterKnife;
 
@@ -18,9 +20,6 @@ import butterknife.ButterKnife;
  */
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseView,IWaitDialog {
-
-
-
 
     private KProgressHUD kProgressHUD;
     private KProgressHUD kProgressHUDWithProgress;
@@ -37,8 +36,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
             throw new IllegalStateException(this.getClass().getSimpleName() + "没有提供正确的LayoutId");
         }
         init();
+        initStatusBar();
         onCreateAfter(savedInstanceState);
     }
+
+    private void initStatusBar() {
+     StatusBarUtils.tintStatusBar(this, BaseApplication.color(R.color.colorBlack));
+    }
+
 
     protected void init() {
         //将activity 放入栈中
@@ -50,11 +55,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         return 0;
     }
 
+
     @Override
     public void onCreateAfter(Bundle savedInstanceState) {
 
     }
-
 
     private boolean isFirstFocused = true;
     @Override
