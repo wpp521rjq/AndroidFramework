@@ -50,4 +50,11 @@ public class SplashScreenActivity extends BaseToolBarActivity {
     public void initData() {
         delayedToMain(300);
     }
+
+
+    @NonNull
+    @Override
+    protected String getTitleString() {
+        return "欢迎页";
+    }
 }

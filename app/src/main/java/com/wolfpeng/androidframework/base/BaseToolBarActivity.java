@@ -10,11 +10,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.Toast;
 
 import com.wolfpeng.androidframework.R;
 import com.wolfpeng.comlibrary.utils.CheckUtils;
-import com.wolfpeng.comlibrary.utils.Utils;
 import com.wolfpeng.comlibrary.utils.ViewUtils;
 
 import java.lang.reflect.Method;
@@ -56,17 +54,16 @@ public abstract class BaseToolBarActivity extends BaseActivity {
 
 
     private void initToobarBar(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
         if (!CheckUtils.isEmpty(getSubtitleString())) {
             toolbar.setSubtitle(getSubtitleString());
         }
         if (getTitleString() != null) {
             toolbar.setTitle(getTitleString());
         }
+        setSupportActionBar(toolbar);
         if (hasBackButton()) {//如果需要返回按钮
             ActionBar actionBar = getSupportActionBar();
             if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("gjhkml");
         }
 
 

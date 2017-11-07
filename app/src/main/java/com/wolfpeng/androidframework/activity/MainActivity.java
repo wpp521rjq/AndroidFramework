@@ -32,17 +32,10 @@ public class MainActivity extends BaseToolBarActivity {
 
     }
 
-
-    @NonNull
-    @Override
-    protected String getSubtitleString() {
-        return "我是副标题";
-    }
-
     @NonNull
     @Override
     protected String getTitleString() {
-        return "来啊 啊 啊";
+        return "云曦新闻";
     }
 
 
