@@ -12,4 +12,6 @@
 
 
     <color name="black_overlay">#66000000</color>
+    <color name="redThemeColor">#FFE74B3C</color>
+    <color name="grayThemeColor">#FFD2D2D2</color>
 </resources>
