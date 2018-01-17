@@ -33,7 +33,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation project(':baselibrary')
+    implementation project(':comlibrary')
     //    implementation 'com.kaopiz:kprogresshud:1.1.0'
     //Field and method binding for Android views which uses annotation processing to generate boilerplate code for you.
     compile 'com.jakewharton:butterknife:8.8.1'
