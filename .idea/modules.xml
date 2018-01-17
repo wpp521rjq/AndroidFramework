@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidFramework.iml" filepath="$PROJECT_DIR$/AndroidFramework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/comlibrary/comlibrary.iml" filepath="$PROJECT_DIR$/comlibrary/comlibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baselibrary/comlibrary.iml" filepath="$PROJECT_DIR$/baselibrary/comlibrary.iml" />
     </modules>
   </component>
 </project>
