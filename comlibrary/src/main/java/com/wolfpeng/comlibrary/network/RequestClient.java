@@ -26,17 +26,8 @@ public class RequestClient {
 
 
 
-    private void init(){
-        //进行初始化请求客户端
 
 
-
-
-
-
-
-
-    }
 
 
 

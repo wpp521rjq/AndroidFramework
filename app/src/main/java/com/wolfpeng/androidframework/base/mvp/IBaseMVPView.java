@@ -23,7 +23,6 @@ public interface IBaseMVPView {
      */
     void onFailure(int errorCode,String message,int flag);
 
-
     /**
      * 显示loading
      * @param message
@@ -32,18 +31,10 @@ public interface IBaseMVPView {
      */
     void showWait(String message,boolean backable,int flag);
 
-
     /**
      * 隐藏wait
      * @param flag
      */
     void hideWait(int flag);
-
-
-
-
-
-
-
 
 }
