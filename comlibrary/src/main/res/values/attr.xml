@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //MavigationBar中的tab 可见数量
+    <declare-styleable name="NavigationBar">
+        <attr name="tabVisiableNumber" format="integer">
+        </attr>
+
+        <attr name="tabTextViewSize" format="integer"></attr>
+
+    </declare-styleable>
+
+
+
+
+
+</resources>

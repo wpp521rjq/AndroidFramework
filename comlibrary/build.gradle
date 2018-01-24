@@ -43,6 +43,5 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.kaopiz:kprogresshud:1.1.0'
     //waitdialog
-
-
+    compile 'com.android.support:design:26.1.0'
 }

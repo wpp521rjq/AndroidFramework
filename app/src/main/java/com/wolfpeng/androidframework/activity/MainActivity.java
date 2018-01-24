@@ -1,5 +1,6 @@
 package com.wolfpeng.androidframework.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -25,6 +26,8 @@ public class MainActivity extends BaseToolBarActivity {
     public void onCreateAfter(Bundle savedInstanceState) {
 //        showWaitDialogWithProgress(null,false,50);
 //        showWaitDialog(null,false);
+
+        startActivity(new Intent(MainActivity.this,NewsActivity.class));
     }
 
     @Override
