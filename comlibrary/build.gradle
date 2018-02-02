@@ -44,4 +44,8 @@ dependencies {
     compile 'com.kaopiz:kprogresshud:1.1.0'
     //waitdialog
     compile 'com.android.support:design:26.1.0'
+    //facebook open resour
+    compile 'com.facebook.fresco:fresco:1.8.0'
+
+
 }

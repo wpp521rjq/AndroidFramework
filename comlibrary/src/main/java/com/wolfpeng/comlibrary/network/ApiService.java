@@ -1,7 +1,7 @@
 package com.wolfpeng.comlibrary.network;
 
+
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
-import com.wolfpeng.comlibrary.entity.ResultEntity;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -42,7 +42,9 @@ public interface ApiService {
 
 
 
-
+    @Headers({"Content-Type:application/json;charset=UTF-8"})
+    @POST("toutiao/index")
+    Observable<RequestBaseEntity<Object>> getNews01(@Query("type") String type, @Query("key") String key);
 
 
 

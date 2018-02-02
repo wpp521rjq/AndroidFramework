@@ -1,7 +1,7 @@
 package com.wolfpeng.androidframework.model;
 
+import com.wolfpeng.comlibrary.entity.NewsEntity;
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
-import com.wolfpeng.comlibrary.entity.ResultEntity;
 
 import io.reactivex.Observable;
 
@@ -23,7 +23,7 @@ public class NewsFragmentModel  {
     }
 
 
-    Observable<RequestBaseEntity<ResultEntity>> getNewsData() {
+    Observable<RequestBaseEntity<NewsEntity>> getNewsData() {
 
 
 

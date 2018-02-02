@@ -1,6 +1,7 @@
 package com.wolfpeng.androidframework.view;
 
 import com.wolfpeng.androidframework.base.mvp.IBaseMVPView;
+import com.wolfpeng.comlibrary.entity.NewsEntity;
 
 
 /**
@@ -13,14 +14,12 @@ import com.wolfpeng.androidframework.base.mvp.IBaseMVPView;
 
 public interface NewsFragmentView extends IBaseMVPView {
 
+      int DOWN_REFRESH=1;//下拉刷新
+      int UP_LOAD=2;//上啦加载
 
 
 
-
-
-
-
-
+      void onLoadSuccess(NewsEntity entity);
 
 
 }

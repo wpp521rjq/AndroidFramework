@@ -9,19 +9,25 @@ package com.wolfpeng.androidframework.base.mvp;
 
 public class BasePresenter<T extends IBaseMVPView> implements IBaseMVPPresenter<T>{
 
-    private T mIBaseMVPView;
+    private T mMVPView;
 
 
+    public T getMVPView() {
+        return mMVPView;
+    }
 
+    public void setMVPView(T mMVPView) {
+        this.mMVPView = mMVPView;
+    }
 
     @Override
     public void attachView(T mvpView) {
-        this.mIBaseMVPView=mvpView;
+        this.mMVPView=mvpView;
     }
 
     @Override
     public void detachView() {
 
-        this.mIBaseMVPView=null;
+        this.mMVPView=null;
     }
 }

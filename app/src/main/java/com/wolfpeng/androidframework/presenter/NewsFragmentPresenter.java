@@ -1,23 +1,26 @@
 package com.wolfpeng.androidframework.presenter;
 
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.wolfpeng.androidframework.base.mvp.BasePresenter;
-import com.wolfpeng.androidframework.base.mvp.IBaseMVPPresenter;
 import com.wolfpeng.androidframework.constant.Constants;
 import com.wolfpeng.androidframework.view.NewsFragmentView;
+import com.wolfpeng.comlibrary.base.ComLibraryApplication;
+import com.wolfpeng.comlibrary.entity.NewsEntity;
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
-import com.wolfpeng.comlibrary.entity.ResultEntity;
-import com.wolfpeng.comlibrary.network.RequestClient;
 import com.wolfpeng.comlibrary.network.RetrofitClient;
+import com.wolfpeng.comlibrary.utils.LogUtils;
 
-import java.util.List;
+import java.io.IOException;
+import java.lang.reflect.Type;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.ObservableTransformer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import okhttp3.ResponseBody;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * author：WolfWang
@@ -31,36 +34,42 @@ import okhttp3.ResponseBody;
 public class NewsFragmentPresenter  extends BasePresenter<NewsFragmentView>{
 
 
-    private void getNewsData(String type){
-        RetrofitClient.getInstance().getApiService().getNews(type, Constants.NEWS_APPKEY).compose(new ObservableTransformer() {
+    public  void getNewsData(String type){
+        getMVPView().showWait("正在加载请稍等",true,1);
+        RetrofitClient.getInstance().getNewsData(Constants.getTypeByTab(type), new Observer<ResponseBody>() {
             @Override
-            public ObservableSource apply(Observable upstream) {
-                return upstream.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread());
-            }
-        }).subscribe(new Consumer<Object>() {
-            @Override
-            public void accept(Object o) throws Exception {
-                //转化数据
-
+            public void onSubscribe(Disposable d) {
 
             }
-        }, new Consumer<Throwable>() {
+
             @Override
-            public void accept(Throwable throwable) throws Exception {
-                //进行处理异常
+            public void onNext(ResponseBody responseBody) {
+                getMVPView().hideWait(1);
+                try {
+                    String result =responseBody.string();
+                    //将result 进行转化
+                    Type type = new TypeToken<RequestBaseEntity<NewsEntity>>() {}.getType();
+                    RequestBaseEntity<NewsEntity> requestBaseEntity = new Gson().fromJson(result,type);
+                    //将其转换成
+//                    Toast.makeText(ComLibraryApplication.getApplication(),.toString(),Toast.LENGTH_SHORT).show();
+                    getMVPView().onLoadSuccess(requestBaseEntity.getResult());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                getMVPView().hideWait(1);
+                getMVPView().onFailure(0,e.getMessage(),0);
+            }
+
+            @Override
+            public void onComplete() {
+
+
             }
         });
-
     }
-
-
-
-
-
-
-
-
-
-
 
 }

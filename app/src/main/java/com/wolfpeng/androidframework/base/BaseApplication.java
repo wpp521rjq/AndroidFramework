@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.wolfpeng.androidframework.AppManager;
 import com.wolfpeng.comlibrary.base.ComLibraryApplication;
 
@@ -22,35 +23,44 @@ public class BaseApplication extends Application {
     private static Resources resources;
 
 
-
     @Override
     public void onCreate() {
         super.onCreate();
         initVariable();
+        initFresco();
         ComLibraryApplication.init(this);
+    }
+
+    /**
+     * 初始化fresco
+     */
+    private void initFresco() {
+        Fresco.initialize(this);//初始化fresco
     }
 
     /**
      * 初始化变量
      */
     private void initVariable() {
-        context=getApplicationContext();
-        resources=context.getResources();
+        context = getApplicationContext();
+        resources = context.getResources();
     }
+
     /**
      * getcolor
+     *
      * @param id
      * @return
      */
-    public static int color(int id){
+    public static int color(int id) {
         return resources.getColor(id);
     }
 
-    public static String string(int id){
+    public static String string(int id) {
         return resources.getString(id);
     }
 
-    public static Drawable drawable(int id){
+    public static Drawable drawable(int id) {
         return resources.getDrawable(id);
     }
 

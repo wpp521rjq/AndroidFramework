@@ -1,17 +1,21 @@
 package com.wolfpeng.androidframework.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wolfpeng.androidframework.R;
+import com.wolfpeng.androidframework.adapter.NewsAdapter;
 import com.wolfpeng.androidframework.base.BaseFragment;
+import com.wolfpeng.androidframework.presenter.NewsFragmentPresenter;
+import com.wolfpeng.androidframework.view.NewsFragmentView;
+import com.wolfpeng.comlibrary.entity.NewsEntity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,18 +28,21 @@ import butterknife.Unbinder;
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsFragment extends BaseFragment {
+public class NewsFragment extends BaseFragment implements NewsFragmentView{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.tv_news_info)
     TextView tvNewsInfo;
+    @BindView(R.id.recyclerView_news)
+    RecyclerView recyclerViewNews;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    NewsFragmentPresenter newsFragmentPresenter;
+    private NewsAdapter newsAdapter;
 
     public NewsFragment() {
         // Required empty public constructor
@@ -76,6 +83,51 @@ public class NewsFragment extends BaseFragment {
     @Override
     public void initData(View view, @Nullable Bundle savedInstanceState) {
         tvNewsInfo.setText(mParam1);
+        newsFragmentPresenter = new NewsFragmentPresenter();
+        newsFragmentPresenter.attachView(this);
+        //
+        newsAdapter=new NewsAdapter();
+        recyclerViewNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        newsFragmentPresenter.getNewsData(mParam1);
 
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        newsFragmentPresenter.detachView();
+        if(newsFragmentPresenter!=null){
+            newsFragmentPresenter.detachView();//view presenter分离
+            newsFragmentPresenter=null;
+        }
+    }
+
+    @Override
+    public void onCommonSuccess(int flag) {
+        //
+
+    }
+
+    @Override
+    public void onFailure(int errorCode, String message, int flag) {
+
+
+    }
+
+    @Override
+    public void showWait(String message, boolean backable, int flag) {
+
+    }
+
+    @Override
+    public void hideWait(int flag) {
+
+    }
+
+    @Override
+    public void onLoadSuccess(NewsEntity entity) {
+        recyclerViewNews.setAdapter(newsAdapter);
+        newsAdapter.setDataBeanList(entity.getData());
     }
 }

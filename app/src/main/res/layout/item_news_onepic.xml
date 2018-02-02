@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@drawable/selector_news_touch_bg"
+    android:layout_height="96dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/simpleDraweeView_item_news_pic1"
+        android:layout_width="88dp"
+        android:layout_height="66dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        fresco:placeholderImageScaleType="focusCrop"
+        fresco:placeholderImage="@drawable/shape_place_holder_image"/>
+
+    <TextView
+        android:id="@+id/tv_item_news_pic1_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="105dp"
+        android:layout_marginLeft="12dp"
+        android:maxLines="2"
+        android:text="国家版权局等四部门通报5起典型网络文学侵权盗版案件"
+        android:textColor="#262626"
+        android:textSize="17sp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_item_news_pic1_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016年08月24日"
+            android:textColor="#BCBCBC"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_item_news_pic1_authorname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:text="易看网"
+            android:textColor="#BCBCBC"
+            android:textSize="12sp"/>
+
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.5"
+        android:background="#cccccc"/>
+
+</RelativeLayout>
