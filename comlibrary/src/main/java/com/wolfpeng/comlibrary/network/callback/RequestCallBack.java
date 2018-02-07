@@ -1,5 +1,9 @@
 package com.wolfpeng.comlibrary.network.callback;
 
+import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
+
+import io.reactivex.disposables.Disposable;
+
 /**
  * author：WolfWang
  * date：2018/1/26 11:04
@@ -8,6 +12,8 @@ package com.wolfpeng.comlibrary.network.callback;
  */
 
 public interface RequestCallBack<T> {
+
+    void onSubscribe(Disposable d);
 
     /**
      * 成功返回的时候
@@ -18,10 +24,10 @@ public interface RequestCallBack<T> {
 
 
     /**
-     * 根据code 返回进行相应的异常处理
-     * @param code
+     * 返回进行相应的异常处理
+     * @param requestBaseEntity
      */
-    void callFailed(int code);
+    void callFailed(RequestBaseEntity requestBaseEntity);
 
 
     /**
@@ -29,6 +35,11 @@ public interface RequestCallBack<T> {
      * @param throwable
      */
     void callException(Throwable throwable);
+
+    /**
+     * 请求完成的时候这个跟call exception方法只调用一个
+     */
+    void callComplete();
 
 
 

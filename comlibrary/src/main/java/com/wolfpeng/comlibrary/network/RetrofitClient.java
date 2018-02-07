@@ -4,13 +4,16 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.wolfpeng.comlibrary.base.ComLibraryApplication;
 import com.wolfpeng.comlibrary.entity.NewsEntity;
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
+import com.wolfpeng.comlibrary.network.callback.RequestCallBack;
 import com.wolfpeng.comlibrary.utils.LogUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -108,12 +111,48 @@ public class RetrofitClient {
         }
         return null;
     }
-    public void getNewsData(String type , Observer<ResponseBody> observer){
+    public void getNewsData(String type , final RequestCallBack<RequestBaseEntity<NewsEntity>> requestCallBack){
         getApiService().getNews(type,"06c24133dcbc5d1324324ed874f3ec49")
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        requestCallBack.onSubscribe(d);
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        //进行解析
+                        try {
+                            String result=responseBody.string();
+                            Type type = new TypeToken<RequestBaseEntity<NewsEntity>>() {}.getType();
+                            RequestBaseEntity<NewsEntity> newsEntityRequestBaseEntity=new Gson().fromJson(result,type);
+                            if(newsEntityRequestBaseEntity.isSuccess()){
+                                requestCallBack.callSuccess(newsEntityRequestBaseEntity);
+                            }else{
+                                requestCallBack.callFailed(newsEntityRequestBaseEntity);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        requestCallBack.callException(e);
+
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        requestCallBack.callComplete();
+                    }
+                });
     }
 
 

@@ -21,26 +21,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
- * Use the {@link NewsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class NewsFragment extends BaseFragment implements NewsFragmentView{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class NewsFragment extends BaseFragment implements NewsFragmentView {
+
     private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     @BindView(R.id.tv_news_info)
     TextView tvNewsInfo;
     @BindView(R.id.recyclerView_news)
     RecyclerView recyclerViewNews;
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
-    private String mParam2;
     NewsFragmentPresenter newsFragmentPresenter;
     private NewsAdapter newsAdapter;
 
@@ -61,7 +50,6 @@ public class NewsFragment extends BaseFragment implements NewsFragmentView{
         NewsFragment fragment = new NewsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,7 +59,6 @@ public class NewsFragment extends BaseFragment implements NewsFragmentView{
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -86,7 +73,7 @@ public class NewsFragment extends BaseFragment implements NewsFragmentView{
         newsFragmentPresenter = new NewsFragmentPresenter();
         newsFragmentPresenter.attachView(this);
         //
-        newsAdapter=new NewsAdapter();
+        newsAdapter = new NewsAdapter();
         recyclerViewNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsFragmentPresenter.getNewsData(mParam1);
 
@@ -97,9 +84,9 @@ public class NewsFragment extends BaseFragment implements NewsFragmentView{
     public void onDestroyView() {
         super.onDestroyView();
         newsFragmentPresenter.detachView();
-        if(newsFragmentPresenter!=null){
+        if (newsFragmentPresenter != null) {
             newsFragmentPresenter.detachView();//view presenter分离
-            newsFragmentPresenter=null;
+            newsFragmentPresenter = null;
         }
     }
 

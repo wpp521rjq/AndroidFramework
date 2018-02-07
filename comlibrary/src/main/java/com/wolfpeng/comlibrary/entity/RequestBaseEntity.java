@@ -9,12 +9,13 @@ package com.wolfpeng.comlibrary.entity;
 
 public class RequestBaseEntity<T> {
 
-
-
-
     private String reason;
     private T result;
-    private String error_code;//错误码
+    private int error_code;//错误码
+    private String resultcode;//旧版本的返回的失败码
+
+
+//    {"resultcode":"101","reason":"错误的请求KEY!","result":null,"error_code":10001}
 
 
     public String getReason() {
@@ -33,14 +34,25 @@ public class RequestBaseEntity<T> {
         this.result = result;
     }
 
-    public String getError_code() {
+    public int  getError_code() {
         return error_code;
     }
 
-    public void setError_code(String error_code) {
+    public void setError_code(int error_code) {
         this.error_code = error_code;
     }
 
+    public String getResultcode() {
+        return resultcode;
+    }
+
+    public void setResultcode(String resultcode) {
+        this.resultcode = resultcode;
+    }
+
+    public boolean isSuccess(){
+        return getError_code()==RequestErrorCode.REQUEST_NORMAL;
+    }
 
     @Override
     public String toString() {
@@ -48,6 +60,7 @@ public class RequestBaseEntity<T> {
                 "reason='" + reason + '\'' +
                 ", result=" + result +
                 ", error_code='" + error_code + '\'' +
+                ", resultcode='" + resultcode + '\'' +
                 '}';
     }
 }

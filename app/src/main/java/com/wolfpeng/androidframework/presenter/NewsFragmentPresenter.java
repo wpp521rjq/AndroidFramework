@@ -12,6 +12,7 @@ import com.wolfpeng.comlibrary.base.ComLibraryApplication;
 import com.wolfpeng.comlibrary.entity.NewsEntity;
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
 import com.wolfpeng.comlibrary.network.RetrofitClient;
+import com.wolfpeng.comlibrary.network.callback.RequestCallBack;
 import com.wolfpeng.comlibrary.utils.LogUtils;
 
 import java.io.IOException;
@@ -36,38 +37,31 @@ public class NewsFragmentPresenter  extends BasePresenter<NewsFragmentView>{
 
     public  void getNewsData(String type){
         getMVPView().showWait("正在加载请稍等",true,1);
-        RetrofitClient.getInstance().getNewsData(Constants.getTypeByTab(type), new Observer<ResponseBody>() {
+        RetrofitClient.getInstance().getNewsData(Constants.getTypeByTab(type), new RequestCallBack<RequestBaseEntity<NewsEntity>>() {
             @Override
             public void onSubscribe(Disposable d) {
 
             }
 
             @Override
-            public void onNext(ResponseBody responseBody) {
-                getMVPView().hideWait(1);
-                try {
-                    String result =responseBody.string();
-                    //将result 进行转化
-                    Type type = new TypeToken<RequestBaseEntity<NewsEntity>>() {}.getType();
-                    RequestBaseEntity<NewsEntity> requestBaseEntity = new Gson().fromJson(result,type);
-                    //将其转换成
-//                    Toast.makeText(ComLibraryApplication.getApplication(),.toString(),Toast.LENGTH_SHORT).show();
-                    getMVPView().onLoadSuccess(requestBaseEntity.getResult());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void callSuccess(RequestBaseEntity<NewsEntity> result) {
+                getMVPView().onLoadSuccess(result.getResult());
             }
 
             @Override
-            public void onError(Throwable e) {
+            public void callFailed(RequestBaseEntity requestBaseEntity) {
                 getMVPView().hideWait(1);
-                getMVPView().onFailure(0,e.getMessage(),0);
+                Toast.makeText(ComLibraryApplication.getApplication(),requestBaseEntity.getReason(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onComplete() {
+            public void callException(Throwable throwable) {
+                getMVPView().hideWait(1);
+            }
 
-
+            @Override
+            public void callComplete() {
+                getMVPView().hideWait(1);
             }
         });
     }
