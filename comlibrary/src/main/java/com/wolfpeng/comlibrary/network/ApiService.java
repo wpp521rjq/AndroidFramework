@@ -18,12 +18,6 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-
-
-
-
-
-
     /**
      * 使用post进行请求返回responsebody
      * 请求地址：http://v.juhe.cn/toutiao/index
@@ -36,32 +30,6 @@ public interface ApiService {
     @Headers({"Content-Type:application/json;charset=UTF-8"})
     @POST("toutiao/index")
     Observable<ResponseBody> getNews(@Query("type") String type, @Query("key") String key);
-
-
-
-
-
-
-    @Headers({"Content-Type:application/json;charset=UTF-8"})
-    @POST("toutiao/index")
-    Observable<RequestBaseEntity<Object>> getNews01(@Query("type") String type, @Query("key") String key);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.wolfpeng.androidframework.R;
+import com.wolfpeng.androidframework.constant.NewsType;
 import com.wolfpeng.comlibrary.entity.NewsEntity;
 
 import java.util.List;
@@ -31,10 +32,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<NewsEntity.DataBean> dataBeanList;
 
-    private final int IMAGE_ONE = 1;//一张图片
-    private final int IMAGE_TWO = 2;//两张图片
-    private final int IMAGE_THREE = 3;//三张图片
-    private final int IMAGE_DEFAULT = 0;//默认的
 
     public List<NewsEntity.DataBean> getDataBeanList() {
         return dataBeanList;
@@ -54,56 +51,42 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //进行多重选择
         RecyclerView.ViewHolder viewHolder;
-        switch (viewType) {
-            case IMAGE_ONE:
-                viewHolder = new NewsOnePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_onepic, parent, false));
-                break;
-            case IMAGE_TWO:
-                viewHolder = new NewsTwoPictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_twopic, parent, false));
-                break;
-            case IMAGE_THREE:
-                viewHolder = new NewsThreePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_threepic, parent, false));
-                break;
-            default:
-                viewHolder = new NewsOnePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_onepic, parent, false));
-                break;
+        if(viewType==NewsType.PIC_ONE.ordinal()){
+            viewHolder = new NewsOnePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_onepic, parent, false));
+        }else if(viewType==NewsType.PIC_TWO.ordinal()){
+            viewHolder = new NewsTwoPictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_twopic, parent, false));
+        }else if(viewType==NewsType.PIC_THREE.ordinal()) {
+            viewHolder = new NewsThreePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_threepic, parent, false));
+        }else {
+            viewHolder = new NewsOnePictureViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_onepic, parent, false));
         }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-        switch (holder.getItemViewType()) {
-            case IMAGE_ONE:
-                NewsOnePictureViewHolder holder1= (NewsOnePictureViewHolder) holder;
-                holder1.simpleDraweeViewItemNewsPic1.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
-                holder1.tvItemNewsPic1Title.setText(dataBeanList.get(position).getTitle());
-                holder1.tvItemNewsPic1Time.setText(dataBeanList.get(position).getDate());
-                holder1.tvItemNewsPic1Authorname.setText(dataBeanList.get(position).getAuthor_name());
-                break;
-            case IMAGE_TWO:
-                NewsTwoPictureViewHolder holder2= (NewsTwoPictureViewHolder) holder;
-                holder2.simpleDraweeViewItemNewsPic201.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
-                holder2.simpleDraweeViewItemNewsPic202.setImageURI(dataBeanList.get(position).getThumbnail_pic_s02());
-                holder2.tvItemNewsPic2Title.setText(dataBeanList.get(position).getTitle());
-                holder2.tvItemNewsPic02Time.setText(dataBeanList.get(position).getDate());
-                holder2.tvItemNewsPic02Authorname.setText(dataBeanList.get(position).getAuthor_name());
-                break;
-            case IMAGE_THREE:
-                NewsThreePictureViewHolder holder3= (NewsThreePictureViewHolder) holder;
-                holder3.simpleDraweeViewItemNewsPic301.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
-                holder3.simpleDraweeViewItemNewsPic302.setImageURI(dataBeanList.get(position).getThumbnail_pic_s02());
-                holder3.simpleDraweeViewItemNewsPic303.setImageURI(dataBeanList.get(position).getThumbnail_pic_s03());
-                holder3.tvItemNewsPic3Title.setText(dataBeanList.get(position).getTitle());
-                holder3.tvItemNewsPic03Time.setText(dataBeanList.get(position).getDate());
-                holder3.tvItemNewsPic03Authorname.setText(dataBeanList.get(position).getAuthor_name());
-                break;
-            case IMAGE_DEFAULT:
-                break;
+        if(holder instanceof NewsOnePictureViewHolder){
+            NewsOnePictureViewHolder holder1= (NewsOnePictureViewHolder) holder;
+            holder1.simpleDraweeViewItemNewsPic1.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
+            holder1.tvItemNewsPic1Title.setText(dataBeanList.get(position).getTitle());
+            holder1.tvItemNewsPic1Time.setText(dataBeanList.get(position).getDate());
+            holder1.tvItemNewsPic1Authorname.setText(dataBeanList.get(position).getAuthor_name());
+        }else if(holder instanceof NewsTwoPictureViewHolder){
+            NewsTwoPictureViewHolder holder2= (NewsTwoPictureViewHolder) holder;
+            holder2.simpleDraweeViewItemNewsPic201.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
+            holder2.simpleDraweeViewItemNewsPic202.setImageURI(dataBeanList.get(position).getThumbnail_pic_s02());
+            holder2.tvItemNewsPic2Title.setText(dataBeanList.get(position).getTitle());
+            holder2.tvItemNewsPic02Time.setText(dataBeanList.get(position).getDate());
+            holder2.tvItemNewsPic02Authorname.setText(dataBeanList.get(position).getAuthor_name());
+        }else if(holder instanceof NewsThreePictureViewHolder){
+            NewsThreePictureViewHolder holder3= (NewsThreePictureViewHolder) holder;
+            holder3.simpleDraweeViewItemNewsPic301.setImageURI(dataBeanList.get(position).getThumbnail_pic_s());
+            holder3.simpleDraweeViewItemNewsPic302.setImageURI(dataBeanList.get(position).getThumbnail_pic_s02());
+            holder3.simpleDraweeViewItemNewsPic303.setImageURI(dataBeanList.get(position).getThumbnail_pic_s03());
+            holder3.tvItemNewsPic3Title.setText(dataBeanList.get(position).getTitle());
+            holder3.tvItemNewsPic03Time.setText(dataBeanList.get(position).getDate());
+            holder3.tvItemNewsPic03Authorname.setText(dataBeanList.get(position).getAuthor_name());
         }
-
-
     }
 
     @Override
@@ -120,13 +103,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         if (TextUtils.isEmpty(dataBeanList.get(position).getThumbnail_pic_s())) {
-            return IMAGE_DEFAULT;
+            return NewsType.PIC_DEFAULT.ordinal();
         } else if (TextUtils.isEmpty(dataBeanList.get(position).getThumbnail_pic_s02())){
-            return IMAGE_ONE;
+            return NewsType.PIC_ONE.ordinal();
         } else if (TextUtils.isEmpty(dataBeanList.get(position).getThumbnail_pic_s03())) {
-            return IMAGE_TWO;
+            return NewsType.PIC_TWO.ordinal();
         } else {
-            return IMAGE_THREE;
+            return NewsType.PIC_THREE.ordinal();
         }
     }
 

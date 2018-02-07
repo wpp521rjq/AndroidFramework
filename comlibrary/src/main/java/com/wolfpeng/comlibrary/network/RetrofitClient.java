@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.wolfpeng.comlibrary.base.ComLibraryApplication;
+import com.wolfpeng.comlibrary.constants.Constants;
 import com.wolfpeng.comlibrary.entity.NewsEntity;
 import com.wolfpeng.comlibrary.entity.RequestBaseEntity;
 import com.wolfpeng.comlibrary.network.callback.RequestCallBack;
@@ -112,7 +113,7 @@ public class RetrofitClient {
         return null;
     }
     public void getNewsData(String type , final RequestCallBack<RequestBaseEntity<NewsEntity>> requestCallBack){
-        getApiService().getNews(type,"06c24133dcbc5d1324324ed874f3ec49")
+        getApiService().getNews(type, Constants.REQUEST_KEY)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

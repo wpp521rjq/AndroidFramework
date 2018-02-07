@@ -13,6 +13,7 @@ public enum  NewsType {
     PIC_ONE,//一张图片的布局
     PIC_TWO,//两张图片的布局
     PIC_THREE,//三张图片的布局
+    PIC_DEFAULT,//当没有图片的时候
     HEADER_VIEW,//新闻页
 
 }
