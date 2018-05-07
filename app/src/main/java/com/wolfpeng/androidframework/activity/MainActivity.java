@@ -29,7 +29,7 @@ public class MainActivity extends BaseToolBarActivity {
 
 
 
-
+//test
         startActivity(new Intent(MainActivity.this,NewsActivity.class));
     }
 
