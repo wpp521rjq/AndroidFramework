@@ -27,6 +27,9 @@ public class MainActivity extends BaseToolBarActivity {
 //        showWaitDialogWithProgress(null,false,50);
 //        showWaitDialog(null,false);
 
+
+
+
         startActivity(new Intent(MainActivity.this,NewsActivity.class));
     }
 
